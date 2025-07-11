@@ -10,7 +10,6 @@ env:
     TF_VAR_aws_key_pub: ${{secrets.TF_VAR_aws_key_pub}}
     TF_VAR_azure_key_pub: ${{secrets.TF_VAR_azure_key_pub}}
 
-
 jobs:
     terraform_plan:
         name: Terraform Plan
@@ -21,9 +20,14 @@ jobs:
         steps:
         - name: Checkout
           uses: actions/checkout@v4
+        
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v3
+          with:
+            terraform_version: "1.5.7"  # Ou a versão que você preferir
+        
         - name: Terraform Plan
           run: |
-            terraform init
-            terraform validade
-            terraform plan
-
+             terraform init
+             terraform validate  # Corrigido o typo aqui
+             terraform plan
